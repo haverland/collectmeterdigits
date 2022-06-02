@@ -35,12 +35,12 @@ Open a terminal and type in:
 
 It download now all images in a "data" subfolder. The imagenames will be hashed for your privacy. 
 
-After it the duplicates will be automaticly removed and finally you have a zip file with <your-esp32name>.zip 
+After it the duplicates will be automaticly removed and finally you have a zip file with \<your-esp32name\>.zip 
 
-If it is smaller than 2MB you can mail it at iotson<at>t-online.de 
+If it is smaller than 2MB you can mail it to iotson(at)t-online.de 
 
-### Can i help more ? 
+### Comming Next
 
-Yes, you can! 
+*  decribe labeling with sample images
+*  pre-prediction via tflite
 
-<TODO> decribe labeling with sample images
