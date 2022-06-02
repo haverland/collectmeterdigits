@@ -1,0 +1,10 @@
+LICENSE
+setup.py
+collectmeterdigits/__init__.py
+collectmeterdigits/__main__.py
+collectmeterdigits/collect.py
+collectmeterdigits.egg-info/PKG-INFO
+collectmeterdigits.egg-info/SOURCES.txt
+collectmeterdigits.egg-info/dependency_links.txt
+collectmeterdigits.egg-info/requires.txt
+collectmeterdigits.egg-info/top_level.txt

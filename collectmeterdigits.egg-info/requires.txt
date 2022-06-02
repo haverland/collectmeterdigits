@@ -1,0 +1,8 @@
+pillow
+numpy
+matplotlib
+scipy
+scikit-learn
+imagehash
+urllib3
+requests

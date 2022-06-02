@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: collectmeterdigits
+Version: 0.1.0
+Summary: Reads images from digital meters.
+Home-page: https://github.com/haverland/collectmeterdigits
+Author: Frank Haverland
+Author-email: iotson@t-online.de
+License: Apache 2.0
+Keywords: different tags here
+Platform: any
+Classifier: Programming Language :: Python
+Classifier: Development Status :: 4 - Beta
+Classifier: Natural Language :: English
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: Linux
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+License-File: LICENSE
+
+
+    The program readout digital meter images from edgeAI devices, collect the images 
+    and removes duplicated.
+    The images will be anonymized (name replaced with hash).
+    At last step, the images will be pre labeled by a neuronal network
+    
