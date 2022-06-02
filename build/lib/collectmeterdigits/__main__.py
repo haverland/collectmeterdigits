@@ -6,7 +6,7 @@ from collectmeterdigits.collect import collect
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('meter', help='the edgeAI meter server name')
-    parser.add_argument('--days', type=int, default=3, help='count of days back to read from yesterday. (default: 3)')
+    parser.add_argument('--days', type=int, default=3, help='count of days back to read. (default: 3)')
 
     # print help message if no argument is given
     if len(sys.argv)==1:

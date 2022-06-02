@@ -1,4 +1,4 @@
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 import urllib.request
 import re
 import requests
@@ -36,6 +36,9 @@ def readimages(servername, output_dir, daysback=15):
                 except HTTPError as h:
                     print( serverurl + "/fileserver/log/digit/" + picturedate + "/" + hour + "/ not found." )
                     continue
+                except URLError as ue:
+                    print("URL-Error! Server not available? Requested URL was: ", serverurl + "/fileserver/log/digit/" + picturedate + "/" + hour + "/" )
+                    exit(1)
                 print("Loding ... ",  servername + "/" + picturedate + "/" + hour)
                 
                 mybytes = fp.read()
