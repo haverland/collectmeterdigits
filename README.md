@@ -54,6 +54,11 @@ If the image is not usable to identify the digit, click on delete.
 
 After all images are labeled, the window closes automaticly.
 
+If you're unsure, here you can see examples.
+
+![](images/ExampleLables.png)
+
+
 If you only want label images you can type:
 
     python3 -m collectmeterdigits --labeling=\<path_to_your_images\>
