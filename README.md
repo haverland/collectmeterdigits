@@ -30,17 +30,38 @@ Open a terminal and type in:
 
     pip install git+https://github.com/haverland/collectmeterdigits
 
-    python3 -m collectmeterdigits <your-esp32name> --days=3
+    python3 -m collectmeterdigits --collect=<your-esp32name> --days=3
 
 
-It download now all images in a "data" subfolder. The imagenames will be hashed for your privacy. 
+It downloads now all images in a "data" subfolder. The image names will be hashed for your privacy. 
+Be patiant. It will takes a while.
 
-After it the duplicates will be automaticly removed and finally you have a zip file with \<your-esp32name\>.zip 
+After it the duplicates will be automaticly removed and finally you have a folder named data/labled with the images.
 
-If it is smaller than 2MB you can mail it to iotson(at)t-online.de 
+
+### Label the images
+
+Now you can label the images. After reading the images it opens a window.
+
+You can see the digit and have to readjust the label. If it is correctly, you can click on
+update. If not use the slider to adjust it.
+
+The yellow lines helps you. Look at the gap between the digits. At left scale you read the value. Don't worry, it must not 100% right. And sometimes it's not easy to choose the value. 
+
+If the image is not usable to identify the digit, click on delete.
+
+![](images/Labeling.png)
+
+After all images are labeled, the window closes automaticly.
+
+
+Now, If it is smaller than 2MB you can mail it to iotson(at)t-online.de. Else please contact us, to find a other way.
+
+If you only want label images you can type:
+
+    python3 -m collectmeterdigits --labeling=\<path_to_your_images\>
 
 ### Comming Next
 
-*  decribe labeling with sample images
 *  pre-prediction via tflite
 
