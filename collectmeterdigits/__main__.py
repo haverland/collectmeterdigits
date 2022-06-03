@@ -16,7 +16,7 @@ def main():
         sys.exit(1)
         
     args = parser.parse_args()
-    print(f"labeling:", args.labeling=='')
+    
     if (args.labeling==''):
         collect(args.collect, args.days)
     else:
