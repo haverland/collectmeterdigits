@@ -54,12 +54,17 @@ If the image is not usable to identify the digit, click on delete.
 
 After all images are labeled, the window closes automaticly.
 
-
-Now, If it is smaller than 2MB you can mail it to iotson(at)t-online.de. Else please contact us, to find a other way.
-
 If you only want label images you can type:
 
     python3 -m collectmeterdigits --labeling=\<path_to_your_images\>
+
+### Ready to share
+
+After labeling you find the images under **"./data/labeled"**. 
+
+Zip the folder. If it is smaller than 2MB you can mail it to iotson(at)t-online.de. Else please contact us, to find a other way.
+
+
 
 ### Comming Next
 

@@ -8,11 +8,13 @@ from datetime import date, timedelta
 import imagehash
 import secrets
 import shutil
+from collectmeterdigits.labeling import label
+
 
 
 target_path = "./data"                   # root data path
 target_raw_path =  "./data/raw_images"   # here all raw images will be stored
-target_zip_path = "./data/zip_files"
+target_label_path = "./data/labeled"
 
 def yesterday(daysbefore=1):
     ''' return the date of yesterday as string in format yyyymmdd'''
@@ -107,12 +109,11 @@ def remove_similar_images(image_filenames, hashfunc = imagehash.average_hash):
         os.remove(image)
         
 
-def create_zip(files, meter):
+def move_to_label(files, meter):
     print("create a zipfile")
-    os.makedirs(target_zip_path, exist_ok=True)
+    os.makedirs(target_label_path, exist_ok=True)
     for file in files:
-        os.replace(file, os.path.join(target_zip_path, os.path.basename(file)))
-    shutil.make_archive(meter, 'zip', target_zip_path)
+        os.replace(file, os.path.join(target_label_path, os.path.basename(file)))
        
 
 
@@ -129,9 +130,12 @@ def collect(meter, days):
     remove_similar_images(ziffer_data_files(os.path.join(target_raw_path, meter)))
 
     # move the files in one zip without directory structure
-    create_zip(ziffer_data_files(os.path.join(target_raw_path, meter)), meter)
+    move_to_label(ziffer_data_files(os.path.join(target_raw_path, meter)), meter)
 
     # cleanup
-    shutil.rmtree(target_path)
+    shutil.rmtree(target_raw_path)
+
+    # label now
+    label(target_label_path)
 
 

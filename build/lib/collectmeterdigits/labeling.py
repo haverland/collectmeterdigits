@@ -3,8 +3,17 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt 
 from matplotlib.widgets import Slider, Button, RadioButtons
-from collectmeterdigits.collect import ziffer_data_files
 import shutil
+
+def ziffer_data_files(input_dir):
+    '''return a list of all images in given input dir in all subdirectories'''
+    imgfiles = []
+    for root, dirs, files in os.walk(input_dir):
+        for file in files:
+            if (file.endswith(".jpg")):
+                imgfiles.append(root + "/" + file)
+    return  imgfiles
+
 
 def label(path):
     global filename
@@ -16,7 +25,13 @@ def label(path):
     global slabel
 
     files = ziffer_data_files(path)
+
+    if (len(files)==0):
+        print("No images found in path")
+        exit(1)
+        
     i = 0
+
     filename = files[i]
     img, filelabel = load_image(filename=filename)
     
