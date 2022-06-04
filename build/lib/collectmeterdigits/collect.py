@@ -41,7 +41,7 @@ def readimages(servername, output_dir, daysback=15):
                 except URLError as ue:
                     print("URL-Error! Server not available? Requested URL was: ", serverurl + "/fileserver/log/digit/" + picturedate + "/" + hour + "/" )
                     exit(1)
-                print("Loding ... ",  servername + "/" + picturedate + "/" + hour)
+                print("Loading ... ",  servername + "/" + picturedate + "/" + hour)
                 
                 mybytes = fp.read()
 

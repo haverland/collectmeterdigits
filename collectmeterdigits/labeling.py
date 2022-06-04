@@ -39,12 +39,17 @@ def label(path):
     plt.xticks([0.2, 0.4, 0.6, 0.8])
     im = plt.imshow(img, aspect='1.6', extent=[0, 1, 0, 1])
     for y in np.arange(0.2, 0.8, 0.2):
-        plt.axhline(y=y,color='yellow')
+        plt.axhline(y=y, xmin=0, xmax=0.2, color='yellow')
+        plt.axhline(y=y, xmin=0.8, xmax=1, color='yellow')
+    plt.axhline(y=0.2, xmin=0.2, xmax=0.8, color='yellow', linestyle="--")
+    plt.axhline(y=0.8, xmin=0.2, xmax=0.8, color='yellow', linestyle="--")
+    for x in np.arange(0.2, 0.8, 0.6):
+        plt.axvline(x=x, color='yellow', linestyle="--")
     ax=plt.gca()
     ax.get_xaxis().set_visible(False) 
     #plt.tight_layout()
     axlabel = plt.axes([0.1, 0.025, 0.7, 0.04])
-    slabel = Slider(axlabel, label='Label',valmin= 0.1, valmax=9.9, valstep=0.1, 
+    slabel = Slider(axlabel, label='Label',valmin= 0.0, valmax=9.9, valstep=0.1, 
                     valinit=filelabel,
                     orientation='horizontal')
     nextax = plt.axes([0.87, 0.025, 0.1, 0.04])
