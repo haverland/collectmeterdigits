@@ -36,15 +36,21 @@ def label(path):
     img, filelabel = load_image(filename=filename)
     
     title = plt.title(filelabel)  # set title
-    plt.xticks([0.2, 0.4, 0.6, 0.8])
+    plt.xticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
     im = plt.imshow(img, aspect='1.6', extent=[0, 1, 0, 1])
-    for y in np.arange(0.2, 0.8, 0.2):
-        plt.axhline(y=y, xmin=0, xmax=0.2, color='yellow')
-        plt.axhline(y=y, xmin=0.8, xmax=1, color='yellow')
-    plt.axhline(y=0.2, xmin=0.2, xmax=0.8, color='yellow', linestyle="--")
-    plt.axhline(y=0.8, xmin=0.2, xmax=0.8, color='yellow', linestyle="--")
-    for x in np.arange(0.2, 0.8, 0.6):
-        plt.axvline(x=x, color='yellow', linestyle="--")
+    for y in np.arange(0.1, 0.91, 0.1):
+        print(y)
+        if (int(y*10)%2==0):
+            color='yellow'   
+        else:
+            color='blue'
+        plt.axhline(y=y, xmin=0, xmax=0.2, color=color)
+        plt.axhline(y=y, xmin=0.8, xmax=1, color=color)
+        plt.axhline(y=y, xmin=0.2, xmax=0.8, color=color, linestyle="--")
+
+    plt.axvline(x=0.2, ymin=0.0, ymax=1, color='red', linestyle=":")
+    plt.axvline(x=0.8, ymin=0.0, ymax=1, color='red', linestyle=":")
+       
     ax=plt.gca()
     ax.get_xaxis().set_visible(False) 
     #plt.tight_layout()
