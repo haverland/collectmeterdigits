@@ -1,3 +1,5 @@
+import os
+
 try:
     from setuptools import setup, find_packages
 except ImportError:
@@ -5,19 +7,12 @@ except ImportError:
     ez_setup.use_setuptools()
     from setuptools import setup, find_packages
 
-try: # for pip >= 10
-    from pip._internal.req import parse_requirements
-except ImportError: # for pip <= 9.0.3
-    from pip.req import parse_requirements
 
-import os
 
 import collectmeterdigits
 
 my_project_path = os.path.abspath(os.path.dirname(__file__))
 
-install_reqs = parse_requirements('requirements.txt', session='hack')
-print(install_reqs)
 long_description = """
     The program readout digital meter images from edgeAI devices, collect the images 
     and removes duplicated.
@@ -32,7 +27,14 @@ setup(
     license='Apache 2.0',
     author='Frank Haverland',
     author_email='iotson@t-online.de',
-    install_requires=[str(requirement.requirement) for requirement in install_reqs],
+    install_requires=['pillow',
+                    'numpy',
+                    'matplotlib',
+                    'scipy',
+                    'scikit-learn',
+                    'imagehash',
+                    'urllib3',
+                    'requests'],
     tests_require=['nose'],
     packages=find_packages(exclude=['tests']),
     description='Reads images from digital meters.',
