@@ -9,6 +9,7 @@ import imagehash
 import secrets
 import shutil
 from collectmeterdigits.labeling import label
+import time
 
 
 
@@ -58,11 +59,18 @@ def readimages(servername, output_dir, daysback=15):
                     else:
                         prefix = prefix + '_'
                     filename = secrets.token_hex(nbytes=16) + ".jpg"
-                    if (not os.path.exists(path + "/" + prefix + filename)):
-                        
-                        img = Image.open(requests.get(serverurl+url, stream=True).raw)
-                        img.save(path + "/" + prefix + filename)
-                        count = count +1
+                    countrepeat = 10
+                    while countrepeat > 0:
+                        if (not os.path.exists(path + "/" + prefix + filename)):
+                            try:
+                                img = Image.open(requests.get(serverurl+url, stream=True).raw)
+                                img.save(path + "/" + prefix + filename)
+                                count = count + 1
+                                countrepeat = 0
+                            except HTTPError as h:
+                                print( path + "/" + prefix + filename + " could not be loaded - Retry in 10 s ... " + str(countrepeat))
+                                time.sleep(10)
+                                countrepeat = countrepeat - 1
     print(f"{count} images are loaded from meter: {servername}")
 
 
@@ -117,7 +125,7 @@ def move_to_label(files, meter):
        
 
 
-def collect(meter, days):
+def collect(meter, days, keepolddata=False):
     print(meter)
     # ensure the target path exists
     print("retrieve images")
@@ -133,7 +141,8 @@ def collect(meter, days):
     move_to_label(ziffer_data_files(os.path.join(target_raw_path, meter)), meter)
 
     # cleanup
-    shutil.rmtree(target_raw_path)
+    if not keepolddata:
+        shutil.rmtree(target_raw_path)
 
     # label now
     label(target_label_path)

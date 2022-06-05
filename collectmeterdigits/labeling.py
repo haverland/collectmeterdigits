@@ -57,6 +57,12 @@ def label(path):
     removeax = plt.axes([0.87, 0.4, 0.1, 0.04])
     bremove = Button(removeax, 'delete', hovercolor='0.975')
     
+    increaselabel = plt.axes([0.93, 0.1, 0.05, 0.04])
+    bincreaselabel = Button(increaselabel, '+0.1', hovercolor='0.975')
+    decreaselabel = plt.axes([0.87, 0.1, 0.05, 0.04])
+    bdecreaselabel = Button(decreaselabel, '-0.1', hovercolor='0.975')
+
+
     def load_next():
         global im
         global title
@@ -74,6 +80,14 @@ def label(path):
         title.set_text(filelabel)
         slabel.set_val(filelabel)
         plt.draw()
+
+    def increase_label(event):
+        slabel.val = (slabel.val + 0.1) % 10
+        slabel.set_val(slabel.val)
+
+    def decrease_label(event):
+        slabel.val = (slabel.val - 0.1) % 10
+        slabel.set_val(slabel.val)
 
     def remove(event):
         global filename
@@ -94,6 +108,9 @@ def label(path):
     
     bnext.on_clicked(next)
     bremove.on_clicked(remove)
+    bincreaselabel.on_clicked(increase_label)
+    bdecreaselabel.on_clicked(decrease_label)
+
     plt.show()
 
     

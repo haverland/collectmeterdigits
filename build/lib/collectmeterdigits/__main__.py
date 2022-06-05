@@ -9,6 +9,7 @@ def main():
     parser.add_argument('--collect', default='', help='collect all images. The edgeAI meter server name must be set')
     parser.add_argument('--days', type=int, default=3, help='count of days back to read. (default: 3)')
     parser.add_argument('--labeling', default='', help='labelpath if you want label the images')
+    parser.add_argument('--keepolddata', default=False, action="store_true", help='do not delete downloaded data')
 
     # print help message if no argument is given
     if len(sys.argv)==1:
@@ -16,9 +17,9 @@ def main():
         sys.exit(1)
         
     args = parser.parse_args()
-    
+
     if (args.labeling==''):
-        collect(args.collect, args.days)
+        collect(args.collect, args.days, args.keepolddata)
     else:
         label(args.labeling)    
 
