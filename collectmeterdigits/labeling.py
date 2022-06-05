@@ -15,7 +15,7 @@ def ziffer_data_files(input_dir):
     return  imgfiles
 
 
-def label(path):
+def label(path, startlabel=0):
     global filename
     global i
     global im
@@ -32,14 +32,13 @@ def label(path):
         
     i = 0
 
-    filename = files[i]
-    img, filelabel = load_image(filename=filename)
+    img, filelabel, filename, i = load_image(files, i, startlabel)
     
     title = plt.title(filelabel)  # set title
     plt.xticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
     im = plt.imshow(img, aspect='1.6', extent=[0, 1, 0, 1])
     for y in np.arange(0.1, 0.91, 0.1):
-        print(y)
+#        print(y)
         if (int(y*10)%2==0):
             color='yellow'   
         else:
@@ -58,6 +57,8 @@ def label(path):
     slabel = Slider(axlabel, label='Label',valmin= 0.0, valmax=9.9, valstep=0.1, 
                     valinit=filelabel,
                     orientation='horizontal')
+    previousax = plt.axes([0.87, 0.225, 0.1, 0.04])
+    bprevious = Button(previousax, 'previous', hovercolor='0.975')
     nextax = plt.axes([0.87, 0.025, 0.1, 0.04])
     bnext = Button(nextax, 'update', hovercolor='0.975')
     removeax = plt.axes([0.87, 0.4, 0.1, 0.04])
@@ -68,6 +69,21 @@ def label(path):
     decreaselabel = plt.axes([0.87, 0.1, 0.05, 0.04])
     bdecreaselabel = Button(decreaselabel, '-0.1', hovercolor='0.975')
 
+    def load_previous():
+        global im
+        global title
+        global slabel
+        global i
+        global filelabel
+        global filename
+        
+        i = (i - 1) % len(files)
+        img, filelabel, filename, i = load_image(files, i)
+        im.set_data(img)
+        title.set_text(filelabel)
+        slabel.set_val(filelabel)
+        plt.draw()
+
 
     def load_next():
         global im
@@ -77,11 +93,8 @@ def label(path):
         global filelabel
         global filename
         
-        i = i + 1
-        if (i>len(files)-1):
-            exit(0)
-        filename = files[i]
-        img, filelabel = load_image(filename)
+        i = (i + 1) % len(files)
+        img, filelabel, filename, i = load_image(files, i)
         im.set_data(img)
         title.set_text(filelabel)
         slabel.set_val(filelabel)
@@ -98,6 +111,8 @@ def label(path):
         os.remove(filename)
         load_next()
 
+    def previous(event):
+        load_previous()
 
     def next(event):
         global filelabel
@@ -106,11 +121,13 @@ def label(path):
         basename = os.path.basename(filename).split('_', 1)
         basename = basename[-1]
         if (filelabel != slabel.val):
-            shutil.move(filename, os.path.join(os.path.dirname(filename), str(slabel.val) + "_" + basename))
+            _zw = os.path.join(os.path.dirname(filename), "{:.1f}".format(slabel.val) + "_" + basename)
+            shutil.move(filename, os.path.join(os.path.dirname(filename), "{:.1f}".format(slabel.val) + "_" + basename))
         load_next()
     
     
     bnext.on_clicked(next)
+    bprevious.on_clicked(previous)
     bremove.on_clicked(remove)
     bincreaselabel.on_clicked(increase_label)
     bdecreaselabel.on_clicked(decrease_label)
@@ -121,17 +138,22 @@ def label(path):
         
 
 
-def load_image(filename):
-    base = os.path.basename(filename)
+def load_image(files, i, startlabel = -1):
 
-    # get label from filename (1.2_ new or 1_ old),
-    if (base[1]=="."):
-        target = base[0:3]
-    else:
-        target = base[0:1]
-        
-    category = float(target)
-    
+    while True:
+        base = os.path.basename(files[i])
+        # get label from filename (1.2_ new or 1_ old),
+        if (base[1]=="."):
+            target = base[0:3]
+        else:
+            target = base[0:1]
+        category = float(target)
+        if category >= startlabel:  
+            break 
+        else:
+            i = (i + 1)
+
+    filename = files[i]
     test_image = Image.open(filename).resize((20, 32))
-    return test_image, category
+    return test_image, category, filename, i
     
