@@ -88,12 +88,10 @@ def label(path):
         plt.draw()
 
     def increase_label(event):
-        slabel.val = (slabel.val + 0.1) % 10
-        slabel.set_val(slabel.val)
+        slabel.set_val((slabel.val + 0.1) % 10)
 
     def decrease_label(event):
-        slabel.val = (slabel.val - 0.1) % 10
-        slabel.set_val(slabel.val)
+        slabel.set_val((slabel.val - 0.1) % 10)
 
     def remove(event):
         global filename
