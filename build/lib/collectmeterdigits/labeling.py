@@ -36,10 +36,14 @@ def label(path):
     img, filelabel = load_image(filename=filename)
     
     title = plt.title(filelabel)  # set title
-    plt.xticks([0.2, 0.4, 0.6, 0.8])
+    plt.xticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
     im = plt.imshow(img, aspect='1.6', extent=[0, 1, 0, 1])
-    for y in np.arange(0.2, 0.8, 0.2):
-        plt.axhline(y=y,color='yellow')
+    for y in np.arange(0.1, 0.91, 0.1):
+        print(y)
+        if (int(y*10)%2==0):
+            plt.axhline(y=y,color='yellow')
+        else:
+            plt.axhline(y=y,color='blue')
     ax=plt.gca()
     ax.get_xaxis().set_visible(False) 
     #plt.tight_layout()
