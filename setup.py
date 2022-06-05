@@ -8,9 +8,6 @@ except ImportError:
     from setuptools import setup, find_packages
 
 
-
-import collectmeterdigits
-
 my_project_path = os.path.abspath(os.path.dirname(__file__))
 
 long_description = """
