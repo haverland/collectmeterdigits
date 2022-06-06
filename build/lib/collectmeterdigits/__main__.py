@@ -20,7 +20,6 @@ def main():
     
     args = parser.parse_args()
     
-    print(args.startlabel)
     if (args.labeling==''):
         collect(args.collect, args.days, keepolddata=args.keepdownloads, download=not args.nodownload, startlabel=args.startlabel)
     else:
