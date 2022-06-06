@@ -102,9 +102,12 @@ def remove_similar_images(image_filenames, hashfunc = imagehash.average_hash):
             print('Problem: ', e, ' with ', img)
             continue
         images.append([hash, img])
-
-    HistoricHashData = load_hash_file('./data/HistoricHashData.txt')
-
+  
+    if (os.path.exists('./data/HistoricHashData.txt')):
+        HistoricHashData = load_hash_file('./data/HistoricHashData.txt')
+    else:
+        HistoricHashData = []
+        
     duplicates = {}
     for hash in images:
         if (hash[1] not in duplicates):
@@ -167,14 +170,13 @@ def load_hash_file(hashfilename):
        
 
 
-def collect(meter, days, keepolddata=False, nodownload=False):
-    print(meter)
+def collect(meter, days, keepolddata=False, download=True):
     # ensure the target path exists
-    print("retrieve images")
     os.makedirs(target_raw_path, exist_ok=True)
     
     # read all images from meters
-    if not nodownload:
+    if download:
+        print("retrieve images")
         readimages(meter, target_raw_path, days)
     
     # remove all same or similar images and remove the empty folders
