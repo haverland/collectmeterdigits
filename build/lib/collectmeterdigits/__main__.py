@@ -6,24 +6,24 @@ from collectmeterdigits.labeling import label
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--collect', default='', help='collect all images. The edgeAI meter server name must be set')
+    parser.add_argument('--collect', help='collect all images. The edgeAI meter server name must be set')
     parser.add_argument('--days', type=int, default=3, help='count of days back to read. (default: 3)')
     parser.add_argument('--labeling', default='', help='labelpath if you want label the images')
-    parser.add_argument('--labelstart', type=float, default='0', help='Optional: start value of labeling')
-    parser.add_argument('--keepolddata', default=False, action="store_true", help='do not delete downloaded data')
-    parser.add_argument('--nodownload', default=False, action="store_true", help='do not download data')
+    parser.add_argument('--keepdownloads', action='store_true', help='Normally all downloaded data will be deleted. If set it keeps the images.')
+    parser.add_argument('--nodownload', action='store_true', help='Do not download pictures. Only remove duplicates and labeling.')
+    parser.add_argument('--startlabel', type=int, default=0, help='only images >= startlabel. (default: all)')
 
     # print help message if no argument is given
     if len(sys.argv)==1:
         parser.print_help(sys.stderr)
         sys.exit(1)
-        
+    
     args = parser.parse_args()
-
+    
     if (args.labeling==''):
-        collect(args.collect, args.days, args.keepolddata, args.nodownload)
+        collect(args.collect, args.days, keepolddata=args.keepdownloads, download=not args.nodownload, startlabel=args.startlabel)
     else:
-        label(args.labeling, args.labelstart)    
+        label(args.labeling, args.startlabel)    
 
 if __name__ == '__main__':
     main()

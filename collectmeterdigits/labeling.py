@@ -1,7 +1,9 @@
 import os
 from PIL import Image
+import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt 
+import matplotlib.figure as fig
 from matplotlib.widgets import Slider, Button, RadioButtons
 import shutil
 
@@ -12,6 +14,8 @@ def ziffer_data_files(input_dir):
         for file in files:
             if (file.endswith(".jpg")):
                 imgfiles.append(root + "/" + file)
+    
+    imgfiles = sorted(imgfiles, key=lambda x : os.path.basename(x))
     return  imgfiles
 
 
@@ -24,6 +28,7 @@ def label(path, startlabel=0):
     global ax
     global slabel
 
+    print(f"Startlabel", startlabel)
     files = ziffer_data_files(path)
 
     if (len(files)==0):
@@ -33,9 +38,16 @@ def label(path, startlabel=0):
     i = 0
 
     img, filelabel, filename, i = load_image(files, i, startlabel)
+
+    # disable toolbar
+    matplotlib.rcParams['toolbar'] = 'None'
     
+    # set window title
+    fig = plt.gcf()
+    fig.canvas.manager.set_window_title('1 of ' + str(len(files)) + ' images')
+   
     title = plt.title(filelabel)  # set title
-    plt.xticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
+    plt.yticks(np.arange(0, 1, step=0.1))
     im = plt.imshow(img, aspect='1.6', extent=[0, 1, 0, 1])
     for y in np.arange(0.1, 0.91, 0.1):
 #        print(y)
@@ -47,8 +59,8 @@ def label(path, startlabel=0):
         plt.axhline(y=y, xmin=0.8, xmax=1, color=color)
         plt.axhline(y=y, xmin=0.2, xmax=0.8, color=color, linestyle="--")
 
-    plt.axvline(x=0.2, ymin=0.0, ymax=1, color='red', linestyle=":")
-    plt.axvline(x=0.8, ymin=0.0, ymax=1, color='red', linestyle=":")
+    plt.axvline(x=0.2, ymin=0.0, ymax=1, linewidth=3, color='red', linestyle=":")
+    plt.axvline(x=0.8, ymin=0.0, ymax=1, linewidth=3, color='red', linestyle=":")
        
     ax=plt.gca()
     ax.get_xaxis().set_visible(False) 
@@ -82,6 +94,9 @@ def label(path, startlabel=0):
         im.set_data(img)
         title.set_text(filelabel)
         slabel.set_val(filelabel)
+        fig = plt.gcf()
+        fig.canvas.manager.set_window_title(str(i) + ' of ' + str(len(files)) + ' images')
+
         plt.draw()
 
 
@@ -98,6 +113,9 @@ def label(path, startlabel=0):
         im.set_data(img)
         title.set_text(filelabel)
         slabel.set_val(filelabel)
+        fig = plt.gcf()
+        fig.canvas.manager.set_window_title(str(i) + ' of ' + str(len(files)) + ' images')
+
         plt.draw()
 
     def increase_label(event):
@@ -122,7 +140,8 @@ def label(path, startlabel=0):
         basename = basename[-1]
         if (filelabel != slabel.val):
             _zw = os.path.join(os.path.dirname(filename), "{:.1f}".format(slabel.val) + "_" + basename)
-            shutil.move(filename, os.path.join(os.path.dirname(filename), "{:.1f}".format(slabel.val) + "_" + basename))
+            files[i] = _zw
+            shutil.move(filename, _zw)
         load_next()
     
     
