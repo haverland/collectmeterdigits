@@ -1,5 +1,6 @@
 import os
 from PIL import Image
+import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt 
 import matplotlib.figure as fig
@@ -38,10 +39,13 @@ def label(path, startlabel=0):
 
     img, filelabel, filename, i = load_image(files, i, startlabel)
 
+    # disable toolbar
+    matplotlib.rcParams['toolbar'] = 'None'
+    
     # set window title
     fig = plt.gcf()
     fig.canvas.manager.set_window_title('1 of ' + str(len(files)) + ' images')
-
+   
     title = plt.title(filelabel)  # set title
     plt.xticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
     im = plt.imshow(img, aspect='1.6', extent=[0, 1, 0, 1])
