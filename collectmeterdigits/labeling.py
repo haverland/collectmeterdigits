@@ -2,6 +2,7 @@ import os
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt 
+import matplotlib.figure as fig
 from matplotlib.widgets import Slider, Button, RadioButtons
 import shutil
 
@@ -12,6 +13,8 @@ def ziffer_data_files(input_dir):
         for file in files:
             if (file.endswith(".jpg")):
                 imgfiles.append(root + "/" + file)
+    
+    sorted(imgfiles, key=lambda x : os.path.basename(x))
     return  imgfiles
 
 
@@ -24,6 +27,7 @@ def label(path, startlabel=0):
     global ax
     global slabel
 
+    print(f"Startlabel", startlabel)
     files = ziffer_data_files(path)
 
     if (len(files)==0):
@@ -33,7 +37,11 @@ def label(path, startlabel=0):
     i = 0
 
     img, filelabel, filename, i = load_image(files, i, startlabel)
-    
+
+    # set window title
+    fig = plt.gcf()
+    fig.canvas.manager.set_window_title('1 of ' + str(len(files)) + ' images')
+
     title = plt.title(filelabel)  # set title
     plt.xticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
     im = plt.imshow(img, aspect='1.6', extent=[0, 1, 0, 1])
@@ -82,6 +90,9 @@ def label(path, startlabel=0):
         im.set_data(img)
         title.set_text(filelabel)
         slabel.set_val(filelabel)
+        fig = plt.gcf()
+        fig.canvas.manager.set_window_title(str(i) + ' of ' + str(len(files)) + ' images')
+
         plt.draw()
 
 
@@ -98,6 +109,9 @@ def label(path, startlabel=0):
         im.set_data(img)
         title.set_text(filelabel)
         slabel.set_val(filelabel)
+        fig = plt.gcf()
+        fig.canvas.manager.set_window_title(str(i) + ' of ' + str(len(files)) + ' images')
+
         plt.draw()
 
     def increase_label(event):

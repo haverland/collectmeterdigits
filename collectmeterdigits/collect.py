@@ -107,7 +107,7 @@ def remove_similar_images(image_filenames, hashfunc = imagehash.average_hash):
         HistoricHashData = load_hash_file('./data/HistoricHashData.txt')
     else:
         HistoricHashData = []
-        
+
     duplicates = {}
     for hash in images:
         if (hash[1] not in duplicates):
@@ -170,10 +170,10 @@ def load_hash_file(hashfilename):
        
 
 
-def collect(meter, days, keepolddata=False, download=True):
+def collect(meter, days, keepolddata=False, download=True, startlabel=0):
     # ensure the target path exists
     os.makedirs(target_raw_path, exist_ok=True)
-    
+    print("Startlabel", startlabel)
     # read all images from meters
     if download:
         print("retrieve images")
@@ -190,6 +190,6 @@ def collect(meter, days, keepolddata=False, download=True):
         shutil.rmtree(target_raw_path)
 
     # label now
-    label(target_label_path)
+    label(target_label_path, startlabel=startlabel)
 
 
