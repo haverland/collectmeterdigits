@@ -143,7 +143,7 @@ def move_to_label(files, meter):
         os.replace(file, os.path.join(target_label_path, os.path.basename(file)))
 
 def save_hash_file(images, hashfilename):
-    f =  open(hashfilename, 'a', encoding='utf-8')
+    f =  open(hashfilename, 'w', encoding='utf-8')
     for hash, img in images:
         f.write(img + "\t" + str(hash)+'\n');
     f.close
