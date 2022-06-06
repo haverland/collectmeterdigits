@@ -58,10 +58,22 @@ If you're unsure, here you can see examples.
 
 ![](images/ExampleLables.png)
 
+### More Options
 
 If you only want label images you can type:
 
     python3 -m collectmeterdigits --labeling=\<path_to_your_images\>
+
+or if you want remove similar images. The images must be stored in ./data/raw_images
+
+    python3 -m collectmeterdigits --collect=<ip or servername> --nodownload
+
+You can keep the downloaded images with option --keepdownloads
+
+    python3 -m collectmeterdigits --collect=<ip or servername> --keepdownloads
+
+
+
 
 ### Ready to share
 
