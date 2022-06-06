@@ -71,6 +71,8 @@ If you're unsure, here you can see examples.
 
 ![](images/ExampleLables.png)
 
+
+
 ### More Options
 
 If you only want label images you can type:
@@ -84,6 +86,10 @@ or if you want remove similar images. The images must be stored in ./data/raw_im
 You can keep the downloaded images with option --keepdownloads
 
     python3 -m collectmeterdigits --collect=<ip or servername> --keepdownloads
+
+If the labeling takes to long, you can later restart at a given digit
+
+    python3 -m collectmeterdigits --collect=<ip or servername> --nodownload --startlabel <number>
 
 
 
