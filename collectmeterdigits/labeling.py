@@ -15,7 +15,7 @@ def ziffer_data_files(input_dir):
             if (file.endswith(".jpg")):
                 imgfiles.append(root + "/" + file)
     
-    sorted(imgfiles, key=lambda x : os.path.basename(x))
+    imgfiles = sorted(imgfiles, key=lambda x : os.path.basename(x))
     return  imgfiles
 
 
