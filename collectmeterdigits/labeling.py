@@ -47,7 +47,7 @@ def label(path, startlabel=0):
     fig.canvas.manager.set_window_title('1 of ' + str(len(files)) + ' images')
    
     title = plt.title(filelabel)  # set title
-    plt.xticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
+    plt.yticks(np.arange(0, 1, step=0.1))
     im = plt.imshow(img, aspect='1.6', extent=[0, 1, 0, 1])
     for y in np.arange(0.1, 0.91, 0.1):
 #        print(y)
@@ -59,8 +59,8 @@ def label(path, startlabel=0):
         plt.axhline(y=y, xmin=0.8, xmax=1, color=color)
         plt.axhline(y=y, xmin=0.2, xmax=0.8, color=color, linestyle="--")
 
-    plt.axvline(x=0.2, ymin=0.0, ymax=1, color='red', linestyle=":")
-    plt.axvline(x=0.8, ymin=0.0, ymax=1, color='red', linestyle=":")
+    plt.axvline(x=0.2, ymin=0.0, ymax=1, linewidth=3, color='red', linestyle=":")
+    plt.axvline(x=0.8, ymin=0.0, ymax=1, linewidth=3, color='red', linestyle=":")
        
     ax=plt.gca()
     ax.get_xaxis().set_visible(False) 
