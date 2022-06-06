@@ -140,7 +140,8 @@ def label(path, startlabel=0):
         basename = basename[-1]
         if (filelabel != slabel.val):
             _zw = os.path.join(os.path.dirname(filename), "{:.1f}".format(slabel.val) + "_" + basename)
-            shutil.move(filename, os.path.join(os.path.dirname(filename), "{:.1f}".format(slabel.val) + "_" + basename))
+            files[i] = _zw
+            shutil.move(filename, _zw)
         load_next()
     
     
