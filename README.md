@@ -61,6 +61,10 @@ The yellow and blue lines helps you. Look at the gap between the digits. At left
 
 The digit should be between the red dotted lines.
 
+If you digits are a bit smaller, look at the digit shift. Here it is not 0.2. If you imagine where the digit is at zero, the shift is only 0.05. So 0.1 or 0.0 would be the correct label.
+
+![](images/SmallerDigits.png)
+
 If the image is not usable to identify the digit, click on delete.
 
 ![](images/BadImage.png)
