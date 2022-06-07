@@ -188,7 +188,7 @@ def collect(meter, days, keepolddata=False, download=True, startlabel=0, savedub
         readimages(meter, target_raw_path, days)
     
     # remove all same or similar images and remove the empty folders
-    remove_similar_images(ziffer_data_files(os.path.join(target_raw_path, meter)), meter, savedublicates)
+    remove_similar_images(ziffer_data_files(os.path.join(target_raw_path, meter)), meter, savedublicates=savedublicates)
 
     # move the files in one zip without directory structure
     move_to_label(ziffer_data_files(os.path.join(target_raw_path, meter)), meter)
