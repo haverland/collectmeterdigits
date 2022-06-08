@@ -26,7 +26,11 @@ Before you read out the images, have a look at
 
 **But the height should be based on the window edges and on the digit.**
 
-For best result you should uncheck the *Lock aspect ratio* option. When setup the digit it should fit the inner rectangle. Now move up/down to fit the digit window. After all the digit must not in the inner window, but should have the right size to fit in. And you should not have a lower/upper border for best results.
+For best result you should uncheck the *Lock aspect ratio* option. When setup the digit it should fit the inner rectangle. Now move up/down to fit the digit window.
+
+After all the digit need not to be in the inner window, but should have the right size to fit in. And you should not have a lower/upper border for best results.
+
+The middle line indicates the center of the image, if it is in the x.0 position. In this case it should fit exactly in the inner rectangle.
 
 ![Setup LogfileRetentionInDays](images/ROI-digit.png)
 
