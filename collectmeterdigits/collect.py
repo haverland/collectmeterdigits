@@ -135,6 +135,8 @@ def remove_similar_images(image_filenames, meter, hashfunc = imagehash.average_h
     else:
         HistoricHashData = []
 
+    count = 0
+
     duplicates = {}
     for hash in images:
         if (hash[1] not in duplicates):
@@ -151,6 +153,9 @@ def remove_similar_images(image_filenames, meter, hashfunc = imagehash.average_h
                     duplicates = set([row[1] for row in similarimgs])
                 else:
                     duplicates |= set([row[1] for row in similarimgs])
+        count = count + 1
+        if not count % 1000:
+            print("..." + str(count))
 
     # extend Historic Hash Data
     for _image in images:

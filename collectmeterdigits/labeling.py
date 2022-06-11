@@ -27,6 +27,7 @@ def label(path, startlabel=0):
     global title
     global ax
     global slabel
+    global files
 
     print(f"Startlabel", startlabel)
     files = ziffer_data_files(path)
@@ -61,6 +62,8 @@ def label(path, startlabel=0):
 
     plt.axvline(x=0.2, ymin=0.0, ymax=1, linewidth=3, color='red', linestyle=":")
     plt.axvline(x=0.8, ymin=0.0, ymax=1, linewidth=3, color='red', linestyle=":")
+
+    plt.text(1.1, 0.9, "You can use cursor key controll also:\n\nleft/right = prev/next\nup/down=in/decrease value\ndelete=remove.", fontsize=6)
        
     ax=plt.gca()
     ax.get_xaxis().set_visible(False) 
@@ -100,7 +103,7 @@ def label(path, startlabel=0):
         plt.draw()
 
 
-    def load_next():
+    def load_next(increaseindex = True):
         global im
         global title
         global slabel
@@ -108,7 +111,8 @@ def label(path, startlabel=0):
         global filelabel
         global filename
         
-        i = (i + 1) % len(files)
+        if increaseindex:
+            i = (i + 1) % len(files)
         img, filelabel, filename, i = load_image(files, i)
         im.set_data(img)
         title.set_text(filelabel)
@@ -126,8 +130,11 @@ def label(path, startlabel=0):
 
     def remove(event):
         global filename
+        global files
+        global i
         os.remove(filename)
-        load_next()
+        files.pop(i)
+        load_next(False)
 
     def previous(event):
         load_previous()
@@ -143,6 +150,23 @@ def label(path, startlabel=0):
             files[i] = _zw
             shutil.move(filename, _zw)
         load_next()
+
+    def on_press(event):
+#        print('press', event.key)
+        if event.key == 'right':
+            next(event)
+        if event.key == 'left':
+            previous(event)
+        if event.key == 'up':
+            increase_label(event);
+        if event.key == 'down':
+            decrease_label(event)
+        if event.key == 'enter':
+            next(event)
+        if event.key == 'delete':
+            remove(event)
+
+    fig.canvas.mpl_connect('key_press_event', on_press)
     
     
     bnext.on_clicked(next)
