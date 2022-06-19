@@ -53,7 +53,7 @@ def label(path, startlabel=0, imageurlsfile=None):
    
     title = plt.title(filelabel)  # set title
     plt.yticks(np.arange(0, 1, step=0.1))
-    im = plt.imshow(img, aspect='1.6', extent=[0, 1, 0.05, 0.95])
+    im = plt.imshow(img, aspect='1.6', extent=[0, 1, 0, 1])
     for y in np.arange(0.1, 0.91, 0.1):
 #        print(y)
         if (int(y*10)%2==0):
@@ -70,7 +70,6 @@ def label(path, startlabel=0, imageurlsfile=None):
     plt.text(1.1, 0.9, "You can use cursor key controll also:\n\nleft/right = prev/next\nup/down=in/decrease value\ndelete=remove.", fontsize=6)
        
     ax=plt.gca()
-    #ax.autoscale(False)
     ax.get_xaxis().set_visible(False) 
     #plt.tight_layout()
     axlabel = plt.axes([0.1, 0.025, 0.7, 0.04])
