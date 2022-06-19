@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.figure as fig
 from matplotlib.widgets import Slider, Button, RadioButtons
 import shutil
+import pandas as pd
 
 def ziffer_data_files(input_dir):
     '''return a list of all images in given input dir in all subdirectories'''
@@ -19,7 +20,7 @@ def ziffer_data_files(input_dir):
     return  imgfiles
 
 
-def label(path, startlabel=0):
+def label(path, startlabel=0, imageurlsfile=None):
     global filename
     global i
     global im
@@ -30,14 +31,17 @@ def label(path, startlabel=0):
     global files
 
     print(f"Startlabel", startlabel)
-    files = ziffer_data_files(path)
+
+    if (imageurlsfile!=None):
+        files = pd.read_csv(imageurlsfile, index_col=0).to_numpy().reshape(-1)
+    else: 
+        files = ziffer_data_files(path)
 
     if (len(files)==0):
         print("No images found in path")
         exit(1)
         
     i = 0
-
     img, filelabel, filename, i = load_image(files, i, startlabel)
 
     # disable toolbar

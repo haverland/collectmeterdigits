@@ -4,6 +4,7 @@ setup.py
 collectmeterdigits/__init__.py
 collectmeterdigits/__main__.py
 collectmeterdigits/collect.py
+collectmeterdigits/hash_manual.py
 collectmeterdigits/labeling.py
 collectmeterdigits.egg-info/PKG-INFO
 collectmeterdigits.egg-info/SOURCES.txt
