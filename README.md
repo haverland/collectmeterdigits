@@ -82,6 +82,10 @@ If you only want label images you can type:
 
     python3 -m collectmeterdigits --labeling=\<path_to_your_images\>
 
+alternativly a list of files as cvs (index-column is used)
+
+    python3 -m collectmeterdigits --labelfile=\<path_to_your_file\>.csv
+
 or if you want remove similar images. The images must be stored in ./data/raw_images
 
     python3 -m collectmeterdigits --collect=<ip or servername> --nodownload
