@@ -6,8 +6,11 @@ collectmeterdigits/__main__.py
 collectmeterdigits/collect.py
 collectmeterdigits/hash_manual.py
 collectmeterdigits/labeling.py
+collectmeterdigits/predict.py
 collectmeterdigits.egg-info/PKG-INFO
 collectmeterdigits.egg-info/SOURCES.txt
 collectmeterdigits.egg-info/dependency_links.txt
 collectmeterdigits.egg-info/requires.txt
 collectmeterdigits.egg-info/top_level.txt
+collectmeterdigits/models/cnn32-md-20220621-002622-q.tflite
+collectmeterdigits/models/cnn32-md_best.h5

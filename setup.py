@@ -31,7 +31,8 @@ setup(
                     'scikit-learn',
                     'imagehash',
                     'urllib3',
-                    'requests'],
+                    'requests',
+                    'tflite'],
     tests_require=['nose'],
     packages=find_packages(exclude=['tests']),
     description='Reads images from digital meters.',
@@ -47,5 +48,6 @@ setup(
         'Topic :: Software Development :: Libraries :: Application Frameworks',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         ],
+    package_data={'collectmeterdigits': ['models/*.tflite']},
 
     )

@@ -7,6 +7,7 @@ import matplotlib.figure as fig
 from matplotlib.widgets import Slider, Button, RadioButtons
 import shutil
 import pandas as pd
+from collectmeterdigits.predict import predict
 
 def ziffer_data_files(input_dir):
     '''return a list of all images in given input dir in all subdirectories'''
@@ -29,6 +30,7 @@ def label(path, startlabel=0, imageurlsfile=None):
     global ax
     global slabel
     global files
+    global predbox
 
     print(f"Startlabel", startlabel)
 
@@ -55,7 +57,6 @@ def label(path, startlabel=0, imageurlsfile=None):
     plt.yticks(np.arange(0, 1, step=0.1))
     im = plt.imshow(img, aspect='1.6', extent=[0, 1, 0, 1])
     for y in np.arange(0.1, 0.91, 0.1):
-#        print(y)
         if (int(y*10)%2==0):
             color='yellow'   
         else:
@@ -68,10 +69,11 @@ def label(path, startlabel=0, imageurlsfile=None):
     plt.axvline(x=0.8, ymin=0.0, ymax=1, linewidth=3, color='red', linestyle=":")
 
     plt.text(1.1, 0.9, "You can use cursor key controll also:\n\nleft/right = prev/next\nup/down=in/decrease value\ndelete=remove.", fontsize=6)
-       
+    prediction = predict(img)
+    plt.text(-0.6, 0.7, "Prediction:", fontsize=8)
+    predbox = plt.text(-0.6, 0.6, "{:.1f}".format(prediction), fontsize=24, bbox=dict(facecolor='none', edgecolor='black', boxstyle='round,pad=1'))
     ax=plt.gca()
     ax.get_xaxis().set_visible(False) 
-    #plt.tight_layout()
     axlabel = plt.axes([0.1, 0.025, 0.7, 0.04])
     slabel = Slider(axlabel, label='Label',valmin= 0.0, valmax=9.9, valstep=0.1, 
                     valinit=filelabel,
@@ -95,7 +97,8 @@ def label(path, startlabel=0, imageurlsfile=None):
         global i
         global filelabel
         global filename
-        
+        global predbox
+
         i = (i - 1) % len(files)
         img, filelabel, filename, i = load_image(files, i)
         im.set_data(img)
@@ -103,7 +106,7 @@ def label(path, startlabel=0, imageurlsfile=None):
         slabel.set_val(filelabel)
         fig = plt.gcf()
         fig.canvas.manager.set_window_title(str(i) + ' of ' + str(len(files)) + ' images')
-
+        predbox.set_text("{:.1f}".format(predict(img)))
         plt.draw()
 
 
@@ -114,7 +117,8 @@ def label(path, startlabel=0, imageurlsfile=None):
         global i
         global filelabel
         global filename
-        
+        global predbox
+
         if increaseindex:
             i = (i + 1) % len(files)
         img, filelabel, filename, i = load_image(files, i)
@@ -123,7 +127,8 @@ def label(path, startlabel=0, imageurlsfile=None):
         slabel.set_val(filelabel)
         fig = plt.gcf()
         fig.canvas.manager.set_window_title(str(i) + ' of ' + str(len(files)) + ' images')
-
+        predbox.set_text("{:.1f}".format(predict(img)))
+        
         plt.draw()
 
     def increase_label(event):
@@ -137,7 +142,7 @@ def label(path, startlabel=0, imageurlsfile=None):
         global files
         global i
         os.remove(filename)
-        files.pop(i)
+        files = np.delete(files,i, 0)
         load_next(False)
 
     def previous(event):
