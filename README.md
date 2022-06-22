@@ -58,6 +58,8 @@ update. If not use the slider to adjust it.
 
 The yellow and blue lines helps you. Look at the gap between the digits. At left scale you read the value. Don't worry, it must not 100% right. And sometimes it's not easy to choose the value.
 
+The prediction on the left side can help you to identify the digit. But beware the model can be only a help for you. Don't trust the recognition!
+
 ![labeling](images/Labeling3.png)
 
 The digit should be between the red dotted lines.
@@ -103,7 +105,3 @@ If the labeling takes to long, you can later restart at a given digit
 After labeling you find the images under **"./data/labeled"**.
 
 Zip the folder. If it is smaller than 2MB you can mail it to iotson(at)t-online.de. Else please contact us, to find a other way.
-
-### Comming Next
-
-*pre-prediction via tflite
