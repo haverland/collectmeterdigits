@@ -44,7 +44,7 @@ def label(path, startlabel=0, imageurlsfile=None):
         exit(1)
         
     i = 0
-    img, filelabel, filename, i = load_image(files, i, startlabel)
+    img, img_2032, filelabel, filename, i = load_image(files, i, startlabel)
 
     # disable toolbar
     matplotlib.rcParams['toolbar'] = 'None'
@@ -69,7 +69,7 @@ def label(path, startlabel=0, imageurlsfile=None):
     plt.axvline(x=0.8, ymin=0.0, ymax=1, linewidth=3, color='red', linestyle=":")
 
     plt.text(1.1, 0.9, "You can use cursor key controll also:\n\nleft/right = prev/next\nup/down=in/decrease value\ndelete=remove.", fontsize=6)
-    prediction = predict(img)
+    prediction = predict(img_2032)
     plt.text(-0.6, 0.7, "Prediction:", fontsize=8)
     predbox = plt.text(-0.6, 0.6, "{:.1f}".format(prediction), fontsize=24, bbox=dict(facecolor='none', edgecolor='black', boxstyle='round,pad=1'))
     ax=plt.gca()
@@ -100,13 +100,13 @@ def label(path, startlabel=0, imageurlsfile=None):
         global predbox
 
         i = (i - 1) % len(files)
-        img, filelabel, filename, i = load_image(files, i)
+        img, img_2032, filelabel, filename, i = load_image(files, i)
         im.set_data(img)
         title.set_text(filelabel)
         slabel.set_val(filelabel)
         fig = plt.gcf()
         fig.canvas.manager.set_window_title(str(i) + ' of ' + str(len(files)) + ' images')
-        predbox.set_text("{:.1f}".format(predict(img)))
+        predbox.set_text("{:.1f}".format(predict(img_2032)))
         plt.draw()
 
 
@@ -121,13 +121,13 @@ def label(path, startlabel=0, imageurlsfile=None):
 
         if increaseindex:
             i = (i + 1) % len(files)
-        img, filelabel, filename, i = load_image(files, i)
+        img, img_2032, filelabel, filename, i = load_image(files, i)
         im.set_data(img)
         title.set_text(filelabel)
         slabel.set_val(filelabel)
         fig = plt.gcf()
         fig.canvas.manager.set_window_title(str(i) + ' of ' + str(len(files)) + ' images')
-        predbox.set_text("{:.1f}".format(predict(img)))
+        predbox.set_text("{:.1f}".format(predict(img_2032)))
         
         plt.draw()
 
@@ -206,6 +206,7 @@ def load_image(files, i, startlabel = -1):
             i = (i + 1)
 
     filename = files[i]
-    test_image = Image.open(filename).resize((20, 32))
-    return test_image, category, filename, i
+    test_image = Image.open(filename)
+    test_image_resized = test_image.resize((20, 32), Image.NEAREST)
+    return test_image, test_image_resized, category, filename, i
     
