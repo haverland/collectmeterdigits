@@ -13,6 +13,7 @@ def main():
     parser.add_argument('--nodownload', action='store_true', help='Do not download pictures. Only remove duplicates and labeling.')
     parser.add_argument('--startlabel', type=float, default=0.0, help='only images >= startlabel. (default: all)')
     parser.add_argument('--savedublicates', action='store_true', help='Save the dublicates in an intermediate subdirectory in raw_images.')
+    parser.add_argument('--labelfile', default=None, help='file with list of image urls if you want label specific images.')
 
     # print help message if no argument is given
     if len(sys.argv)==1:
@@ -22,7 +23,10 @@ def main():
     args = parser.parse_args()
     
     if (args.labeling==''):
-        collect(args.collect, args.days, keepolddata=args.keepdownloads, download=not args.nodownload, startlabel=args.startlabel, savedublicates=args.savedublicates)
+        if (args.labelfile != None):
+            label(args.labeling, args.startlabel, args.labelfile)    
+        else:
+            collect(args.collect, args.days, keepolddata=args.keepdownloads, download=not args.nodownload, startlabel=args.startlabel)
     else:
         label(args.labeling, args.startlabel)    
 
