@@ -100,6 +100,10 @@ If the labeling takes to long, you can later restart at a given digit
 
     python3 -m collectmeterdigits --collect=<ip or servername> --nodownload --startlabel <number>
 
+If another model should be used for prediction (only output100 yet)
+
+    python3 -m collectmeterdigits --collect=<ip or servername> --model=<modelpath.tflite>
+
 ### Ready to share
 
 After labeling you find the images under **"./data/labeled"**.
