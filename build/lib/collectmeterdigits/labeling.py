@@ -207,6 +207,6 @@ def load_image(files, i, startlabel = -1):
 
     filename = files[i]
     test_image = Image.open(filename)
-    test_image_resized = test_image.resize((20, 32), Image.NEAREST)
+    test_image_resized = test_image
     return test_image, test_image_resized, category, filename, i
     
