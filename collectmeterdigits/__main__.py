@@ -14,6 +14,7 @@ def main():
     parser.add_argument('--startlabel', type=float, default=0.0, help='only images >= startlabel. (default: all)')
     parser.add_argument('--savedublicates', action='store_true', help='Save the dublicates in an intermediate subdirectory in raw_images.')
     parser.add_argument('--labelfile', default=None, help='file with list of image urls if you want label specific images.')
+    parser.add_argument('--model', default=None, help='model file path if a external model should be used')
 
     # print help message if no argument is given
     if len(sys.argv)==1:
