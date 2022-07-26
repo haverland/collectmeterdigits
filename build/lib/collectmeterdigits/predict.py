@@ -3,7 +3,7 @@ import numpy as np
 import pkg_resources
 
 interpreter=None
-internal_model_path = pkg_resources.resource_filename('collectmeterdigits', 'models/cnn32-md-20220621-002622-q.tflite')
+internal_model_path = pkg_resources.resource_filename('collectmeterdigits', 'models/dig-s1-md-v1.2-q.tflite')
 
 def load_interpreter(model_path):
     global interpreter
