@@ -30,9 +30,11 @@ For best result you should uncheck the *Lock aspect ratio* option. When setup th
 
 After all the digit need not to be in the inner window, but should have the right size to fit in. And you should not have a lower/upper border for best results.
 
+![Setup LogfileRetentionInDays](images/ROI-digit.png)
+
 The middle line indicates the center of the image, if it is in the x.0 position. In this case it should fit exactly in the inner rectangle.
 
-![Setup LogfileRetentionInDays](images/ROI-digit.png)
+![Setup LogfileRetentionInDays](images/ROI-setup.png)
 
 ### Read the images
 
