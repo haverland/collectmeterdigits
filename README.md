@@ -102,7 +102,7 @@ If the labeling takes to long, you can later restart at a given digit
 
     python3 -m collectmeterdigits --collect=<ip or servername> --nodownload --startlabel <number>
 
-If another model should be used for prediction (only output100 yet)
+If another model should be used for prediction (dig-con, dig-class11 and dig-class100)
 
     python3 -m collectmeterdigits --collect=<ip or servername> --model=<modelpath.tflite>
 
