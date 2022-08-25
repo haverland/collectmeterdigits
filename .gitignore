@@ -4,3 +4,6 @@ README.md
 .vscode/
 .code-workspace
 data/
+.DS_Store
+build/
+__pychache__
