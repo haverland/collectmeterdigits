@@ -32,6 +32,7 @@ setup(
                     'imagehash',
                     'urllib3',
                     'requests',
+                    'pandas',
                     'tflite'],
     tests_require=['nose'],
     packages=find_packages(exclude=['tests']),
