@@ -3,8 +3,8 @@ import sys
 from .predict import predict
 from collectmeterdigits.collect import collect
 from collectmeterdigits.labeling import label
-from collectmeteranalog.predict import load_interpreter
-from collectmeterdigits import glob
+from collectmeterdigits.predict import predict
+#from collectmeterdigits import glob
 
 
 def main():
@@ -27,8 +27,8 @@ def main():
     args = parser.parse_args()
     
     if (args.model!=None):
-        glob.model_path = args.model
-        load_interpreter(args.model)
+        #glob.model_path = args.model
+        predict(args.model)
     
     if (args.labeling==''):
         if (args.labelfile != None):
