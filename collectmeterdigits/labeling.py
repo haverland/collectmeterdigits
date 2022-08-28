@@ -199,7 +199,10 @@ def load_image(files, i, startlabel = -1):
             target = base[0:3]
         else:
             target = base[0:1]
-        category = float(target)
+        try:
+            category = float(target)
+        except ValueError:
+            category = 0.0
         if category >= startlabel:  
             break 
         else:
