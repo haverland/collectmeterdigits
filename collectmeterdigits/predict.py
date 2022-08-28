@@ -16,6 +16,8 @@ internal_model_path = pkg_resources.resource_filename('collectmeterdigits', 'mod
 
 def load_interpreter(model_path):
     global interpreter
+    if (has_tflite_runtime and not glob.model_path=="off" ):
+        return
     print("Use model: " + model_path)
     if (glob.model_path=="off"):
         return
