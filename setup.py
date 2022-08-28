@@ -33,7 +33,7 @@ setup(
                     'urllib3',
                     'requests',
                     'pandas',
-                    'tflite'],
+                    'tflite-runtime;sys_platform != "darwin"'],
     tests_require=['nose'],
     packages=find_packages(exclude=['tests']),
     description='Reads images from digital meters.',
