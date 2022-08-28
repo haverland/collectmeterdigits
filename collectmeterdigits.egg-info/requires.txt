@@ -6,4 +6,5 @@ scikit-learn
 imagehash
 urllib3
 requests
-tflite
+pandas
+tflite-runtime
