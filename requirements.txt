@@ -7,4 +7,4 @@ imagehash
 urllib3
 requests
 pandas
-tflite-runtime; sys_platform != "darwin"
+tflite-runtime; sys_platform == "linux"
