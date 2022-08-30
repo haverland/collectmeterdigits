@@ -1,0 +1,100 @@
+name: 'Build'
+on:
+  push:
+    tags:
+      - 'v*'
+      - 'beta-v*'
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Generate release changelog"
+        uses: heinrichreimer/github-changelog-generator-action@v2.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} 
+
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: changelog
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+    - name: Create Release For Tag
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: ${{ needs.changelog.outputs.changelog }}
+        draft: false
+        prerelease: ${{ contains(github.ref, 'beta') }}
+  
+  build:
+    name: Build Executables
+    needs: create_release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - os: ubuntu-latest
+            BUILD_CMD: pyinstaller collectmeterdigits.spec
+            OUT_FILE_NAME: collectmeterdigits
+            ASSET_MIME: application/octet-stream
+          - os: macos-latest
+            BUILD_CMD: pyinstaller collectmeterdigits.spec
+            POST_BUILD_CMD: >
+              cd dist/ &&
+              ls -Rls &&
+              zip -r9 collectmeterdigits collectmeterdigits
+            OUT_FILE_NAME: collectmeterdigits.zip
+            ASSET_MIME: application/zip
+          - os: windows-latest
+            BUILD_CMD: pyinstaller collectmeterdigits.spec
+            OUT_FILE_NAME: collectmeterdigits.exe
+            ASSET_MIME: application/vnd.microsoft.portable-executable
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9.12'
+      - name: Install dependencies for ${{ matrix.os }}
+        run: |
+          python -m pip install --upgrade pip wheel setuptools
+          pip install -r requirements.txt
+          pip install pyinstaller
+      - name: Pre-Build for ${{ matrix.os }}
+        if: ${{ matrix.PRE_BUILD_CMD != '' }}
+        run: ${{ matrix.PRE_BUILD_CMD }}
+      - name: Build with pyinstaller for ${{ matrix.os }}
+        run: ${{ matrix.BUILD_CMD }}
+      - name: Post-Build for ${{ matrix.os }}
+        if: ${{ matrix.POST_BUILD_CMD != '' }}
+        run: ${{ matrix.POST_BUILD_CMD }}
+      - name: Upload release assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_name: '${{runner.os}}-${{matrix.OUT_FILE_NAME}}'
+          asset_path: './dist/${{matrix.OUT_FILE_NAME}}'
+          asset_content_type: ${{ matrix.ASSET_MIME }}
+
+  purge_release_if_failed:
+    name: Delete release if build failed
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ failure() || cancelled() }}
+    steps:
+    - uses: dev-drprasad/delete-tag-and-release@v0.2.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        delete_release: true
+        tag_name: ${{ github.ref_name }}
