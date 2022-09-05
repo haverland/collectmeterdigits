@@ -12,7 +12,7 @@ import pkg_resources
 from collectmeterdigits import glob
 
 interpreter=None
-internal_model_path = pkg_resources.resource_filename('collectmeterdigits', 'models/cnn32-md-20220621-002622-q.tflite')
+internal_model_path = pkg_resources.resource_filename('collectmeterdigits', 'models/dig-class100-s2_20220905-213051_q.tflite')
 
 def load_interpreter(model_path):
     global interpreter
