@@ -16,7 +16,8 @@ internal_model_path = pkg_resources.resource_filename('collectmeterdigits', 'mod
 
 def load_interpreter(model_path):
     global interpreter
-    if (has_tflite_runtime and not glob.model_path=="off" ):
+    if (not has_tflite_runtime or glob.model_path=="off" ):
+        print("No model used.")
         return
     print("Use model: " + model_path)
     if (glob.model_path=="off"):
@@ -35,7 +36,9 @@ def predict( image):
             if glob.model_path==None:
                 glob.model_path=internal_model_path
             load_interpreter(glob.model_path)
-
+        # if tflite can not be loaded
+        if interpreter == None:
+            return -1
         interpreter.allocate_tensors()
         input_index = interpreter.get_input_details()[0]["index"]
         output_index = interpreter.get_output_details()[0]["index"]

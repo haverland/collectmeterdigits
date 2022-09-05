@@ -7,4 +7,6 @@ imagehash
 urllib3
 requests
 pandas
+
+[:sys_platform == "linux"]
 tflite-runtime
