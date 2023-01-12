@@ -107,7 +107,7 @@ If the image is not usable to identify the digit, click on delete.
 
 <img src="images/BadImage.png" width="60">
 
-After all images are labeled, the window closes automaticly.
+After all images are labeled (the counter on top switch to 1 of x) you can close the window and share the data or use it for your own training.
 
 If you're unsure, here you can see examples.
 
