@@ -12,15 +12,19 @@ import pkg_resources
 from collectmeterdigits import glob
 
 interpreter=None
-internal_model_path = pkg_resources.resource_filename('collectmeterdigits', 'models/dig-class100-s2_20220905-213051_q.tflite')
+internal_model_path = pkg_resources.resource_filename('collectmeterdigits', 'models/dig-class100-0160_s2_q.tflite')
 
 def load_interpreter(model_path):
     global interpreter
-    if (not has_tflite_runtime or glob.model_path=="off" ):
-        print("No model used.")
+
+    print('modelpath=', model_path)
+
+    if not has_tflite_runtime:
+        print('no tflite')
         return
     print("Use model: " + model_path)
-    if (glob.model_path=="off"):
+    if "off" == glob.model_path:
+        print('model_path=off')
         return
     interpreter = tflite.Interpreter(model_path=model_path)
     return interpreter
@@ -30,11 +34,10 @@ def load_interpreter(model_path):
 def predict( image):
     global interpreter
 
-    if (has_tflite_runtime and not glob.model_path=="off" ):
-        
-        if interpreter==None:
-            if glob.model_path==None:
-                glob.model_path=internal_model_path
+    if has_tflite_runtime and not glob.model_path == "off":
+        if interpreter is None:
+            if glob.model_path is None:
+                glob.model_path = internal_model_path
             load_interpreter(glob.model_path)
         # if tflite can not be loaded
         if interpreter == None:
