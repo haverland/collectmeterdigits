@@ -119,7 +119,7 @@ def remove_similar_images(image_filenames, meter, hashfunc = imagehash.average_h
     '''
     images = []
     count = 0
-    cutoff = 5  # maximum bits that could be different between the hashes. 
+    cutoff = 3  # maximum bits that could be different between the hashes. 
     print(f"Find similar images now in {len(image_filenames)} images ..." )
 
     datum = date.today().strftime("%Y-%m-%d")

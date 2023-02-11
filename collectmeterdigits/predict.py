@@ -39,7 +39,9 @@ def predict( image):
             if glob.model_path is None:
                 glob.model_path = internal_model_path
             load_interpreter(glob.model_path)
-
+        # if tflite can not be loaded
+        if interpreter == None:
+            return -1
         interpreter.allocate_tensors()
         input_index = interpreter.get_input_details()[0]["index"]
         output_index = interpreter.get_output_details()[0]["index"]
