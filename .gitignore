@@ -6,4 +6,5 @@ README.md
 data/
 .DS_Store
 build/
-__pychache__
+__pychache__/
+.idea
