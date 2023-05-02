@@ -45,7 +45,7 @@ setup(
         'Development Status :: 4 - Beta',
         'Natural Language :: English',
         'Intended Audience :: Developers',
-        'Operating System :: Linux',
+        'Operating System :: OS Independent',
         'Topic :: Software Development :: Libraries :: Application Frameworks',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         ],
