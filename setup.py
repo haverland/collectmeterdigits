@@ -19,7 +19,7 @@ long_description = """
 
 setup(
     name='collectmeterdigits',
-    version='1.0.7',
+    version='1.0.8',
     url='https://github.com/haverland/collectmeterdigits',
     license='Apache 2.0',
     author='Frank Haverland',
@@ -34,7 +34,7 @@ setup(
                     'requests',
                     'pandas',
                     'tflite-runtime;sys_platform == "linux"',
-                    'msvc-runtime;sys_platform == "windows"' ],
+                    'msvc-runtime;sys_platform == "win32"' ],
     tests_require=['nose'],
     packages=find_packages(exclude=['tests']),
     description='Reads images from digital meters.',
