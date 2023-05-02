@@ -19,7 +19,7 @@ long_description = """
 
 setup(
     name='collectmeterdigits',
-    version='1.0.0',
+    version='1.0.6',
     url='https://github.com/haverland/collectmeterdigits',
     license='Apache 2.0',
     author='Frank Haverland',
