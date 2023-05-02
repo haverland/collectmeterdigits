@@ -5,8 +5,8 @@ block_cipher = None
 
 
 a = Analysis(
-    ['collectmeterdigits/__main__.py'],
-    pathex=[],
+    ['collectmeterdigits/__main__.py','collectmeterdigits/glob.py','collectmeterdigits/hash_manual.py','collectmeterdigits/labeling.py','collectmeterdigits/predict.py', ],
+    pathex=['collectmeterdigits/'],
     binaries=[],
     datas=[('collectmeterdigits/models/*.tflite', 'collectmeterdigits/models')],
     hiddenimports=['requests'],

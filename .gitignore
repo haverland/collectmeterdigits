@@ -8,3 +8,4 @@ data/
 build/
 __pychache__/
 .idea
+dist/

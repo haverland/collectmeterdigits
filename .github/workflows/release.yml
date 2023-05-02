@@ -13,20 +13,28 @@ jobs:
         include:
           - os: ubuntu-latest
             BUILD_CMD: pyinstaller collectmeterdigits.spec
-            OUT_FILE_NAME: collectmeterdigits
-            ASSET_MIME: application/octet-stream
+            POST_BUILD_CMD: >
+              cd dist/ &&
+              ls -Rls &&
+              zip -r9 collectmeterdigits-linux.zip collectmeterdigits
+            OUT_FILE_NAME: collectmeterdigits-linux.zip
+            ASSET_MIME: application/zip
           - os: macos-latest
             BUILD_CMD: pyinstaller collectmeterdigits.spec
             POST_BUILD_CMD: >
               cd dist/ &&
               ls -Rls &&
-              zip -r9 collectmeterdigits collectmeterdigits
-            OUT_FILE_NAME: collectmeterdigits.zip
+              zip -r9 collectmeterdigits-macos.zip collectmeterdigits
+            OUT_FILE_NAME: collectmeterdigits-macos.zip
             ASSET_MIME: application/zip
           - os: windows-latest
             BUILD_CMD: pyinstaller collectmeterdigits.spec
-            OUT_FILE_NAME: collectmeterdigits.exe
-            ASSET_MIME: application/vnd.microsoft.portable-executable
+            POST_BUILD_CMD: >
+              cd dist/ &&
+              ls -Rls &&
+              zip -r9 collectmeterdigits-windows.zip collectmeterdigits
+            OUT_FILE_NAME: collectmeterdigits-windows.zip
+            ASSET_MIME: application/zip
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python
