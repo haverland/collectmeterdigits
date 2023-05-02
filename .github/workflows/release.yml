@@ -31,7 +31,6 @@ jobs:
             BUILD_CMD: pyinstaller collectmeterdigits.spec
             POST_BUILD_CMD: >
               cd dist/ &&
-              ls -Rls &&
               zip -r9 collectmeterdigits-windows.zip collectmeterdigits
             OUT_FILE_NAME: collectmeterdigits-windows.zip
             ASSET_MIME: application/zip
