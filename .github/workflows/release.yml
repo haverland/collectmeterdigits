@@ -29,9 +29,8 @@ jobs:
             ASSET_MIME: application/zip
           - os: windows-latest
             BUILD_CMD: pyinstaller collectmeterdigits.spec
-            POST_BUILD_CMD: >
-              cd dist/ &&
-              zip -r9 collectmeterdigits-windows.zip collectmeterdigits
+            POST_BUILD_CMD: >+
+              Compress-Archive -Path dist/* -Destination dist/collectmeterdigits-windows.zip
             OUT_FILE_NAME: collectmeterdigits-windows.zip
             ASSET_MIME: application/zip
     steps:
