@@ -63,7 +63,7 @@ or
 
 The application is called via console
 
-    python3 -m collectmeterdigits --collect=<your-esp32name> --days=3
+    python -m collectmeterdigits --collect=<your-esp32name> --days=3
 
 It downloads now all images in a "data" subfolder. The image names will be hashed for your privacy.
 Be patiant. It will takes a while.
@@ -117,27 +117,27 @@ If you're unsure, here you can see examples.
 
 If you only want label images you can type:
 
-    python3 -m collectmeterdigits --labeling=\<path_to_your_images\>
+    python -m collectmeterdigits --labeling=\<path_to_your_images\>
 
 alternativly a list of files as cvs (index-column is used)
 
-    python3 -m collectmeterdigits --labelfile=\<path_to_your_file\>.csv
+    python -m collectmeterdigits --labelfile=\<path_to_your_file\>.csv
 
 or if you want remove similar images. The images must be stored in ./data/raw_images
 
-    python3 -m collectmeterdigits --collect=<ip or servername> --nodownload
+    python -m collectmeterdigits --collect=<ip or servername> --nodownload
 
 You can keep the downloaded images with option --keepdownloads
 
-    python3 -m collectmeterdigits --collect=<ip or servername> --keepdownloads
+    python -m collectmeterdigits --collect=<ip or servername> --keepdownloads
 
 If the labeling takes to long, you can later restart at a given digit
 
-    python3 -m collectmeterdigits --collect=<ip or servername> --nodownload --startlabel <number>
+    python -m collectmeterdigits --collect=<ip or servername> --nodownload --startlabel <number>
 
 If another model should be used for prediction (dig-con, dig-class11 and dig-class100)
 
-    python3 -m collectmeterdigits --collect=<ip or servername> --model=<modelpath.tflite>
+    python -m collectmeterdigits --collect=<ip or servername> --model=<modelpath.tflite>
 
 ### Ready to share
 
