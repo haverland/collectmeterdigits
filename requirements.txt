@@ -5,6 +5,6 @@ scipy
 scikit-learn
 imagehash
 urllib3
-requests
+requests==2.31.0
 pandas
 tflite-runtime; sys_platform == "linux"
