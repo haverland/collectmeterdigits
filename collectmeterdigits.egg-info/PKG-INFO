@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: collectmeterdigits
-Version: 1.0.0
+Version: 1.0.10
 Summary: Reads images from digital meters.
 Home-page: https://github.com/haverland/collectmeterdigits
 Author: Frank Haverland
